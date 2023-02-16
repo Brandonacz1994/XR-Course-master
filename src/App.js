@@ -10,6 +10,7 @@ import Tema_3 from './Tema_3_Camaras';
 import Tema_4 from './Tema_4_Iluminacion';
 import Tema_5 from './Tema_5_Materiales_texturas';
 import Tema_6 from './Tema_6_Collisiones';
+import Tema_7 from './Tema_7_Transformaciones';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/tema_4' element={<Tema_4/>} ></Route>
           <Route path='/tema_5' element={<Tema_5/>}></Route>
           <Route path='/tema_6' element={<Tema_6/>} ></Route>
+          <Route path='/tema_7' element={<Tema_7/>} ></Route>
       </Routes>
     </Router>
 )}

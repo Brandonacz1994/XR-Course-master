@@ -43,10 +43,7 @@ const onSceneReady = (e) => {
   box.checkCollisions = true;
   sphere.checkCollisions = true;
   
-
   var test =PlayGround({playground_width:100,playground_depth:100},scene)
-
- 
 
   scene.onBeforeRenderObservable.add(() => {
     if (box !== undefined) {

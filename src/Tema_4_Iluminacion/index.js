@@ -17,11 +17,13 @@ const onSceneReady = (e) => {
   // This attaches the camera to the canvas
   camera.attachControl(canvas, false);
 
+  
+
   //Lights_Custom.DirectionalLight(scene);
-  //Lights_Custom.PointLight(scene);
+  Lights_Custom.PointLight(scene);
   //Lights_Custom.SpotLight(scene);
   //Lights_Custom.HemisphericLight(scene);
-  Lights_Custom.EmissiveLightFromTexture(scene)
+  //Lights_Custom.EmissiveLightFromTexture(scene)
 
   var sphere = new BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene)
   sphere.position = new BABYLON.Vector3(3, 1, 0);

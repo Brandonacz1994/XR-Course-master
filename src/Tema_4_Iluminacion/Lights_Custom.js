@@ -9,8 +9,8 @@ import batman_texture from '../Tema_4_Iluminacion/batman.png'
 export function PointLight(scene) {
 
     var pointlight = new BABYLON.PointLight("pointlight", new BABYLON.Vector3(0, 10, 0), scene);
-    pointlight.diffuse = new BABYLON.Color3.FromHexString("#FFFFFF")
-    pointlight.specular = new BABYLON.Color3(1, 1, 0)
+    pointlight.diffuse = new BABYLON.Color3.FromHexString("#244b5c")
+    pointlight.specular = new BABYLON.Color3(0, 0, 0)
 
     return pointlight;
 
@@ -23,8 +23,8 @@ export function PointLight(scene) {
  */
 export function DirectionalLight(scene) {
 
-    var directionallight = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
-    directionallight.diffuse = new BABYLON.Color3.FromHexString("#FFFFFF")
+    var directionallight = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(1, 0, 0), scene);
+    directionallight.diffuse = new BABYLON.Color3.FromHexString("#66d3ee")
     directionallight.specular = new BABYLON.Color3(1, 1, 0)
 
     return directionallight;
@@ -62,7 +62,7 @@ export function HemisphericLight(scene) {
     hemisphericlight.intensity = 0.8;
     hemisphericlight.diffuse = new BABYLON.Color3.FromHexString("#FFFFFF");
     hemisphericlight.specular = new BABYLON.Color3(1, 1, 0);
-    hemisphericlight.groundColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+    hemisphericlight.groundColor = new BABYLON.Color3(1, 0, 0);
 
     return hemisphericlight;
 

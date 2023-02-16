@@ -74,6 +74,7 @@ const onSceneReady = (e) => {
 
 
   var box1 = BABYLON.Mesh.CreateBox("Box1", 1.0, scene);
+
   var box2 = BABYLON.Mesh.CreateBox("Box2", 1.0, scene);
 
   var mainbox = BABYLON.MeshBuilder.CreateBox("mainbox", options, scene, true)
@@ -97,7 +98,7 @@ const onSceneReady = (e) => {
   box6.position.x = 6;
 
   //Rotate box around the x axis
-  box1.rotation.x = Math.PI / 6;
+  box1.rotation.x = Math.PI / 3;
 
   //Rotate box around the y axis
   box2.rotation.y = Math.PI / 3;
@@ -115,6 +116,9 @@ const onSceneReady = (e) => {
   box7.parent = box1;
   box7.position.z = -2;
 
+  console.log("hola mundo")
+
+  console.log(box7)
 
   /**
    * funcion para convertir grados a radianes

@@ -21,13 +21,15 @@ const onSceneReady = (e) => {
 
     // Creates, angles, distances and targets the ArcRotateCamera
     //var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), scene);
-    // This positions the camera
-    //camera.setPosition(new BABYLON.Vector3(0, 0, -10));
+    //This positions the camera
+    //camera.setPosition(new BABYLON.Vector3(1, 12, 5));
+
+  
 
     /**************************************************************/
 
     // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
+    camera.setTarget(new BABYLON.Vector3(1,1,1));
 
     // This attaches the camera to the canvas
     camera.attachControl(canvas, false);
@@ -68,18 +70,18 @@ const onSceneReady = (e) => {
     
 	/********** DEVICE ORIENTATION CAMERA EXAMPLE **************************/
 
-    /*
+    
 
     // This creates and positions a device orientation camera 	
-    var camera = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 0, 0), scene);
+    //var camera = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 0, 0), scene);
 
     // This targets the camera to scene origin
-    camera.setTarget(new BABYLON.Vector3(0, 0, 10));
+    //camera.setTarget(new BABYLON.Vector3(0, 0, 10));
 
     // This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
+    //camera.attachControl(canvas, true);
 
-    */
+    
 	
 	/**************************************************************/
 
