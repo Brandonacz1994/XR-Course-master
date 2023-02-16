@@ -66,15 +66,15 @@ const onSceneReady = (e) => {
   //Array points to construct a spiral with lines
   var spiralPoints = [];
 
-  var deltaTheta = 0.1;
-  var deltaY = 0.005;
+  var deltaTheta = 0.3;
+  var deltaY = 0.05;
 
   var radius = 2;
   var theta = 0;
   var X = 12;
   var Y = 5;
   var Z = 3;
-  for (var i = 0; i < 400; i++) {
+  for (var i = 0; i < 200; i++) {
     spiralPoints.push(new BABYLON.Vector3(X + radius * Math.cos(theta), Y, Z + radius * Math.sin(theta)));
     theta += deltaTheta;
     Y += deltaY
@@ -110,7 +110,7 @@ const onSceneReady = (e) => {
   //Create extrusion with updatable parameter set to true for later changes
   var extrusion = BABYLON.MeshBuilder.ExtrudeShape("star", { shape: starShape, path: starExtrusion, sideOrientation: BABYLON.Mesh.DOUBLESIDE, updatable: true }, scene);
   extrusion.position.set(-10, 5, 0);
-  extrusion = BABYLON.MeshBuilder.ExtrudeShape("star", { shape: starShape, path: starExtrusion, rotation: 0.1, sideOrientation: BABYLON.Mesh.DOUBLESIDE, instance: extrusion });
+  extrusion = BABYLON.MeshBuilder.ExtrudeShape("star", { shape: starShape, path: starExtrusion, rotation: 0, sideOrientation: BABYLON.Mesh.DOUBLESIDE, instance: extrusion });
 
 
 //Polygon shape in XoZ plane
@@ -142,7 +142,7 @@ const holes = [];
   const polygon = BABYLON.MeshBuilder.CreatePolygon("polygon", {shape:starPoligon, /*holes:holes,*/ sideOrientation: BABYLON.Mesh.DOUBLESIDE },scene,earcut);
   polygon.position.set(-17, 5, 0);
   polygon.rotation.x = Degrees_to_radians(90)
-  var extrudepolygon = BABYLON.MeshBuilder.ExtrudePolygon("polygon", {shape:starPoligon, holes:holes, depth: 2, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene,earcut);
+  var extrudepolygon = BABYLON.MeshBuilder.ExtrudePolygon("polygon", {shape:starPoligon, depth: 2, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene,earcut);
   extrudepolygon.position.set(-24, 5, 0);
   extrudepolygon.rotation.x = Degrees_to_radians(90)
 

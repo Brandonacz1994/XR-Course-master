@@ -5,6 +5,7 @@ import SceneComponent from "../Babylon_components/SceneComponent";
 import { showWorldAxis, showLocalAxes } from "./Axes"
 
 
+
 const onSceneReady = (e) => {
 
   const { canvas, scene, engine } = e;

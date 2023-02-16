@@ -48,9 +48,9 @@ const onSceneReady = (e) => {
   var sphere_material = Materials.MaterialFromRGB_Hex("sphere_mat", { diffuseColor_hex: "#0000ff" }, scene)
   sphere.material = sphere_material;
 
-  var ground_material = Materials.MaterialFromTexture("ground_mat", { diffuseTexture: water }, scene)
-  ground_material.diffuseTexture.uScale = 1;
-  ground_material.diffuseTexture.vScale = 1;
+  var ground_material = Materials.MaterialFromTexture("ground_mat", { diffuseTexture: fire }, scene)
+  ground_material.diffuseTexture.uScale = 10;
+  ground_material.diffuseTexture.vScale = 10;
   ground.material = ground_material;
 
   //box_material.wireframe=true;
