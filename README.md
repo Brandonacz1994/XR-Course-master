@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Repositorio de temas del curso de desarrollo de aplicacciones de realidad extendida (XR).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Modules installed in this repository:
+
+    "babylonjs": "^5.45.2",
+    "babylonjs-gui": "^5.46.0",
+    "babylonjs-materials": "^5.45.2",
+    "earcut": "^2.2.4",
+    "react": "^18.2.0", //installed by default using npx create-react-app
+    "react-dom": "^18.2.0", //installed by default using npx create-react-app
+    "react-router-dom": "^6.8.1",
 
 ## Available Scripts
 
