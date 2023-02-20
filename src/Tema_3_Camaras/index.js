@@ -1,89 +1,12 @@
 import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
+import * as Cameras_Module from "../Tema_3_Camaras/Cameras_Module"
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: BABYLON.Engine, scene: BABYLON.Scene, canvas: HTMLCanvasElement }) => {
 
     const { canvas, scene, engine } = e;
-
-    /********** FREE CAMERA EXAMPLE **************************/
-
-    // This creates and positions a free camera (non-mesh)
-    const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
-
-    /********** UNIVERSAL CAMERA EXAMPLE **************************/
-
-    // This creates and positions a universal camera (non-mesh)
-    //const camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -10), scene);
-
-    /********** ArcRotateCamera EXAMPLE **************************/
-
-    // Creates, angles, distances and targets the ArcRotateCamera
-    //var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), scene);
-    //This positions the camera
-    //camera.setPosition(new BABYLON.Vector3(1, 12, 5));
-
-  
-
-    /**************************************************************/
-
-    // This targets the camera to scene origin
-    camera.setTarget(new BABYLON.Vector3(1,1,1));
-
-    // This attaches the camera to the canvas
-    camera.attachControl(canvas, false);
-
-    /********** FOLLOW CAMERA EXAMPLE **************************/
-
-    /*
-    
-    //This creates and initially positions a follow camera 	
-    var camera = new BABYLON.FollowCamera("FollowCam", new BABYLON.Vector3(0, 10, -10), scene);
-	
-	//The goal distance of camera from target
-	camera.radius = 30;
-	
-	// The goal height of camera above local origin (centre) of target
-	camera.heightOffset = 10;
-	
-	// The goal rotation of camera around local origin (centre) of target in x y plane
-	camera.rotationOffset = 0;
-	
-	//Acceleration of camera in moving from current to goal position
-	camera.cameraAcceleration = 0.005
-	
-	//The speed at which acceleration is halted 
-	camera.maxCameraSpeed = 10
-	
-	//camera.target is set after the target's creation
-
-    // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
-    
-	// This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
-    
-    */
-    
-
-    
-	/********** DEVICE ORIENTATION CAMERA EXAMPLE **************************/
-
-    
-
-    // This creates and positions a device orientation camera 	
-    //var camera = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 0, 0), scene);
-
-    // This targets the camera to scene origin
-    //camera.setTarget(new BABYLON.Vector3(0, 0, 10));
-
-    // This attaches the camera to the canvas
-    //camera.attachControl(canvas, true);
-
-    
-	
-	/**************************************************************/
 
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
@@ -101,10 +24,12 @@ const onSceneReady = (e) => {
     // Our built-in 'ground' shape.
     BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
 
+    // Our set of diferent cameras examples by using Cameras_Module.
 
-    /*****************SET TARGET FOR CAMERA************************/ 
-	//camera.lockedTarget = box;
-	/**************************************************************/
+    //Cameras_Module.FreeCameraDefault(canvas, scene);
+    //Cameras_Module.UniversalCameraDefault(canvas, scene);
+    //Cameras_Module.ArcRotateCameraDefault(canvas, scene);
+    Cameras_Module.FollowCameraDefault(canvas, box, scene);
 
 
     scene.onBeforeRenderObservable.add(() => {

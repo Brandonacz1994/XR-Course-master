@@ -2,10 +2,12 @@
 import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
-import * as Lights_Custom from "./Lights_Custom"
+import * as Lights_Module from "./Lights_Module"
+
+import batman_texture from '../Tema_4_Iluminacion/batman.png'
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement  }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)
@@ -17,13 +19,11 @@ const onSceneReady = (e) => {
   // This attaches the camera to the canvas
   camera.attachControl(canvas, false);
 
-  
-
-  //Lights_Custom.DirectionalLight(scene);
-  Lights_Custom.PointLight(scene);
-  //Lights_Custom.SpotLight(scene);
-  //Lights_Custom.HemisphericLight(scene);
-  //Lights_Custom.EmissiveLightFromTexture(scene)
+  //Lights_Module.DirectionalLight({diffuseColor:"#ffffff"},scene);
+  //Lights_Module.PointLight(scene);
+  Lights_Module.SpotLight(scene);
+  //Lights_Module.HemisphericLight(scene);
+  //Lights_Module.EmissiveLightFromTexture(batman_texture,scene);
 
   var sphere = new BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene)
   sphere.position = new BABYLON.Vector3(3, 1, 0);

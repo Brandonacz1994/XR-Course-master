@@ -3,6 +3,7 @@ import * as BABYLON from "babylonjs";
 import * as earcut from "earcut"
 import "../App.css"
 
+
 export default ({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onSceneReady, ...rest }) => {
   const reactCanvas = useRef(null);
 

@@ -5,7 +5,7 @@ import SceneComponent from "../Babylon_components/SceneComponent";
 import {PlayGround} from "./PlayGround";
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)

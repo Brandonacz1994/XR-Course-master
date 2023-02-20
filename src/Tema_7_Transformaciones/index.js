@@ -4,9 +4,10 @@ import * as BABYLON from "babylonjs";
 import * as MATERIALS from "babylonjs-materials"
 import SceneComponent from "../Babylon_components/SceneComponent";
 import { showWorldAxis, showLocalAxes } from "./Axes"
+import { Vector3 } from "babylonjs";
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)
@@ -26,20 +27,33 @@ const onSceneReady = (e) => {
   // Default intensity is 1. Let's dim the light a small amount
   light.intensity = 0.7;
 
+  var ground = new BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 100 }, scene)
+
+  var groundMaterial = new MATERIALS.GridMaterial("groundmaterial", scene)
+  groundMaterial.majorUnitFrequency = 5;
+  groundMaterial.minorUnitVisibility = 0.45;
+  groundMaterial.gridRatio = 1;
+  groundMaterial.backFaceCulling = false;
+  groundMaterial.mainColor = new BABYLON.Color3(1, 1, 1);
+  groundMaterial.lineColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+  groundMaterial.opacity = 0.9;
+
+  ground.material = groundMaterial;
+
+
 
   /************Start Pilot*********************************/
 
   var body = BABYLON.MeshBuilder.CreateCylinder("body", { height: 0.75, diameterTop: 0.2, diameterBottom: 0.5, tessellation: 6, subdivisions: 1 }, scene);
   var arm = BABYLON.MeshBuilder.CreateBox("arm", { height: 0.75, width: 0.3, depth: 0.1875 }, scene);
   arm.position.x = 0.125;
-  
+
   var pilot_with_WORLD_translate = BABYLON.Mesh.MergeMeshes([body, arm], true);
 
   var pilot_with_LOCAL_translate = pilot_with_WORLD_translate.createInstance("pilot local");
 
   /*Create world and local axes */
 
-  
 
   showWorldAxis(8, scene)
 
@@ -48,7 +62,7 @@ const onSceneReady = (e) => {
   pilot_with_WORLD_translate.rotation.y = Degrees_to_radians(120);
 
 
-  var localOrigin_2 = showLocalAxes(2,scene);
+  var localOrigin_2 = showLocalAxes(2, scene);
   localOrigin_2.parent = pilot_with_LOCAL_translate;
   pilot_with_LOCAL_translate.rotation.y = Degrees_to_radians(120);
 
@@ -60,38 +74,26 @@ const onSceneReady = (e) => {
 
 
   var unit_per_secs = 1
-  var distance_final= 10
+  var distance_final = 10
 
 
   scene.onBeforeRenderObservable.add(() => {
 
     const deltaTimeInMillis = scene.getEngine().getDeltaTime();
-    const deltaTimeInsecs = (scene.getEngine().getDeltaTime())/1000;
+    const deltaTimeInsecs = (scene.getEngine().getDeltaTime()) / 1000;
 
     //if (i++ < 500) pilot_with_WORLD_translate.translate(direction_traslation_vector, distance_per_render*deltaTimeInMillis, BABYLON.Space.WORLD); //eje Z azul del mundo
     //if (i++ < 500) pilot_with_LOCAL_translate.translate(direction_traslation_vector, distance_per_render*deltaTimeInMillis, BABYLON.Space.LOCAL); //eje z azul del pilot
 
-    i = i+unit_per_secs*deltaTimeInsecs;
-    if (i <= distance_final) pilot_with_WORLD_translate.translate(direction_traslation_vector, unit_per_secs*deltaTimeInsecs, BABYLON.Space.WORLD);
-      
+    i = i + unit_per_secs * deltaTimeInsecs;
+    if (i <= distance_final) pilot_with_WORLD_translate.translate(direction_traslation_vector, unit_per_secs * deltaTimeInsecs, BABYLON.Space.WORLD);
+
     ; //eje Z azul del mundo
-    if (i <= distance_final) pilot_with_LOCAL_translate.translate(direction_traslation_vector, unit_per_secs*deltaTimeInsecs, BABYLON.Space.LOCAL); //eje z azul del pilot
+    if (i <= distance_final) pilot_with_LOCAL_translate.translate(direction_traslation_vector, unit_per_secs * deltaTimeInsecs, BABYLON.Space.LOCAL); //eje z azul del pilot
 
 
   });
 
-  var ground = new BABYLON.MeshBuilder.CreateGround("ground",{width:100,height:100},scene)
-
-  var groundMaterial = new MATERIALS.GridMaterial("groundmaterial", scene)
-	groundMaterial.majorUnitFrequency = 5;
-	groundMaterial.minorUnitVisibility = 0.45;
-	groundMaterial.gridRatio = 1;
-	groundMaterial.backFaceCulling = false;
-	groundMaterial.mainColor = new BABYLON.Color3(1, 1, 1);
-	groundMaterial.lineColor = new BABYLON.Color3(1.0, 1.0, 1.0);
-	groundMaterial.opacity = 0.9;
-
-  ground.material = groundMaterial;
 
 
   /*Examples using boxes  */
@@ -116,7 +118,7 @@ const onSceneReady = (e) => {
   var localOriginBox = showLocalAxes(2, scene);
   localOriginBox.parent = mainbox;
 
-  
+
   /**
    * funcion para convertir grados a radianes
    * @param {*} degrees 
@@ -157,7 +159,108 @@ const onSceneReady = (e) => {
 
   });
 
+
+
+  //Using Transformation Nodes for easing mesh trasformations.
+
+  //create sphere to indicate position of Center of Transformation
+  var node_sphere = BABYLON.MeshBuilder.CreateSphere("Sphere", { diameter: 0.1 }, scene, true);
+  node_sphere.material = new BABYLON.StandardMaterial("mat", scene);
+  node_sphere.material.diffuseColor = new BABYLON.Color3(1, 0, 1);
+
+  // create axes for frame of reference of Center of Transformation
+  var CoTAxis = showLocalAxes(2, scene);
+  var CoT_2Axis = showLocalAxes(2, scene);
+  var CoT_3Axis = showLocalAxes(1, scene);
+
+
+  //create a Center of Transformation
+  var CoT = new BABYLON.TransformNode("root", scene);
+  var CoT_2 = new BABYLON.TransformNode("secondary", scene);
+  var CoT_3 = new BABYLON.TransformNode("tertiary");
+
+  //now parenting other elements
+  node_sphere.parent = CoT;
+  CoTAxis.parent = CoT;
+  CoT.rotation.y = Math.PI / 4;
+  CoT.position = new BABYLON.Vector3(5, 0, 5);
+
+  CoT_2Axis.parent = CoT_2;
+  CoT_2.parent = CoT;
+  CoT_2.position.z = 2;
   
+  CoT_3Axis.parent = CoT_3;
+  CoT_3.parent = CoT_2;
+  CoT_3.position.z = 2;
+
+
+  //create box 
+  var faceColors = [];
+  faceColors[0] = BABYLON.Color3.Blue();
+  faceColors[1] = BABYLON.Color3.Red();
+  faceColors[2] = BABYLON.Color3.Green();
+  faceColors[3] = BABYLON.Color3.White();
+  faceColors[4] = BABYLON.Color3.Yellow();
+  faceColors[5] = BABYLON.Color3.Black();
+
+  var options = {
+    faceColors: faceColors
+  };
+
+
+  var rotating_box = BABYLON.MeshBuilder.CreateBox("Box", options, scene, true);
+
+
+  var rotating_box_mini = BABYLON.MeshBuilder.CreateBox("minibox", options, scene);
+  rotating_box_mini.scaling = new BABYLON.Vector3(0.3, 0.3, 0.3);
+
+
+  //Animation
+  var angle_CoT = 0;
+  var angle_CoT2 = 0;
+  var angle_CoT3 = 0;
+
+  var angle_box = 0;
+  var angle_mini_box = 0;
+
+
+  const Cot_angle_per_secs = Degrees_to_radians(15);
+  const Cot2_angle_per_secs = Degrees_to_radians(30);
+  const Cot3_angle_per_secs = Degrees_to_radians(0);
+
+  const rotating_box_angle_per_secs = Degrees_to_radians(300)
+  const mini_box_angle_per_secs = Degrees_to_radians(180);
+
+
+
+  scene.onBeforeRenderObservable.add(() => {
+
+    var deltaTimeInsecs = (scene.getEngine().getDeltaTime()) / 1000;
+
+    CoT.rotation.y = angle_CoT;
+    CoT_2.rotation.y = angle_CoT2;
+    CoT_3.rotation.y = angle_CoT3;
+
+    rotating_box.position = CoT_2.absolutePosition;
+    rotating_box.rotation.y = angle_box;
+    rotating_box_mini.position = CoT_3.absolutePosition;
+    rotating_box_mini.rotation.y = angle_mini_box;
+
+
+    angle_CoT += Cot_angle_per_secs * deltaTimeInsecs;
+    angle_CoT2 += Cot2_angle_per_secs * deltaTimeInsecs;
+    angle_CoT3 += Cot3_angle_per_secs * deltaTimeInsecs;
+
+
+    angle_box += rotating_box_angle_per_secs * deltaTimeInsecs;
+    angle_mini_box += mini_box_angle_per_secs * deltaTimeInsecs;
+
+
+  })
+
+
+
+
 };
 
 

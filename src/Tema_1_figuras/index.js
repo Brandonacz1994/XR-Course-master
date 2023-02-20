@@ -7,7 +7,7 @@ import * as earcut from "earcut";
 // import SceneComponent from 'babylonjs-hook'; // if you install 'babylonjs-hook' NPM.
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)

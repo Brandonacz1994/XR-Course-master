@@ -2,14 +2,14 @@
 import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
-import * as Materials from "../Tema_5_Materiales_texturas/Materials"
+import * as Materials_Module from "../Tema_5_Materiales_texturas/Materials_Module"
 
 import fire from "../Tema_5_Materiales_texturas/fire.png"
 import water from "../Tema_5_Materiales_texturas/water.jpg"
 import grass from "../Tema_5_Materiales_texturas/grass.jpg"
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)
@@ -23,7 +23,6 @@ const onSceneReady = (e) => {
 
   // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
   const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-
 
   // Default intensity is 1. Let's dim the light a small amount
   light.intensity = 0.7;
@@ -42,13 +41,13 @@ const onSceneReady = (e) => {
   // Our built-in 'ground' shape.
   var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 100 }, scene);
 
-  var box_material = Materials.MaterialRandom(scene);
+  var box_material = Materials_Module.MaterialRandom(scene);
   box.material = box_material;
 
-  var sphere_material = Materials.MaterialFromRGB_Hex("sphere_mat", { diffuseColor_hex: "#0000ff" }, scene)
+  var sphere_material = Materials_Module.MaterialFromRGB_Hex("sphere_mat", { diffuseColor_hex: "#0000ff" }, scene)
   sphere.material = sphere_material;
 
-  var ground_material = Materials.MaterialFromTexture("ground_mat", { diffuseTexture: fire }, scene)
+  var ground_material = Materials_Module.MaterialFromTexture("ground_mat", { diffuseTexture: grass }, scene)
   ground_material.diffuseTexture.uScale = 10;
   ground_material.diffuseTexture.vScale = 10;
   ground.material = ground_material;

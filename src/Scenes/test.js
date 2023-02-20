@@ -5,7 +5,7 @@ import SceneComponent from "../Babylon_components/SceneComponent";
 // import SceneComponent from 'babylonjs-hook'; // if you install 'babylonjs-hook' NPM.
 
 
-const onSceneReady = (e) => {
+const onSceneReady = (e = { engine: BABYLON.Engine, scene: BABYLON.Scene, canvas: HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
   // This creates and positions a free camera (non-mesh)

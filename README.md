@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Modules installed in this repository:
+## NPM modules installed in this repository:
 
     "babylonjs": "^5.45.2",
     "babylonjs-gui": "^5.46.0",
