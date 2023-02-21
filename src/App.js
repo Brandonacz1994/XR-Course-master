@@ -9,7 +9,7 @@ import Tema_2 from "./Tema_2_Posicion_rotacion_escala"
 import Tema_3 from './Tema_3_Camaras';
 import Tema_4 from './Tema_4_Iluminacion';
 import Tema_5 from './Tema_5_Materiales_texturas';
-import Tema_6 from './Tema_6_Collisiones';
+import Tema_6 from './Tema_6_Collisiones_Fisicas';
 import Tema_7 from './Tema_7_Transformaciones';
 import Tema_8 from './Tema_8_Acciones_Eventos'
 

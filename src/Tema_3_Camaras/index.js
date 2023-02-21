@@ -1,4 +1,3 @@
-import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
 import * as Cameras_Module from "../Tema_3_Camaras/Cameras_Module"

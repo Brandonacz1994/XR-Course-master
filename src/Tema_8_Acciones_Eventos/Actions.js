@@ -1,7 +1,13 @@
 import * as BABYLON from "babylonjs";
 
-// Boxes
 
+
+
+/**
+ * Actions examples using babylonjs actions managers.
+ * @param {BABYLON.Camera} camera The instanced babylonjs camera.
+ * @param {BABYLON.Scene} scene The instanced babylonjs scene.
+ */
 export function Acciones(camera, scene) {
 
     var light1 = new BABYLON.PointLight("omni", new BABYLON.Vector3(0, 50, 0), scene);
@@ -55,25 +61,28 @@ export function Acciones(camera, scene) {
     var donut = BABYLON.Mesh.CreateTorus("donut", 2, 1, 16, scene);
 
     // On pick interpolations
-    var prepareButton = function (mesh, color, light) {
+    var LightSwitch3D = function (mesh, color, light) {
         var goToColorAction = new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPickTrigger, light, "diffuse", color, 1000, null, true);
 
         mesh.actionManager = new BABYLON.ActionManager(scene);
+
         mesh.actionManager.registerAction(
             new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPickTrigger, light, "diffuse", BABYLON.Color3.Black(), 1000))
             .then(new BABYLON.CombineAction(BABYLON.ActionManager.NothingTrigger, [ // Then is used to add a child action used alternatively with the root action. 
                 goToColorAction,                                                 // First click: root action. Second click: child action. Third click: going back to root action and so on...   
                 new BABYLON.SetValueAction(BABYLON.ActionManager.NothingTrigger, mesh.material, "wireframe", false)
             ]));
+
         mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPickTrigger, mesh.material, "wireframe", true))
             .then(new BABYLON.DoNothingAction());
+            
         mesh.actionManager.registerAction(new BABYLON.SetStateAction(BABYLON.ActionManager.OnPickTrigger, light, "off"))
             .then(new BABYLON.SetStateAction(BABYLON.ActionManager.OnPickTrigger, light, "on"));
     }
 
-    prepareButton(redBox, BABYLON.Color3.Red(), light1);
-    prepareButton(greenBox, BABYLON.Color3.Green(), light2);
-    prepareButton(blueBox, BABYLON.Color3.Blue(), light3);
+    LightSwitch3D(redBox, BABYLON.Color3.Red(), light1);
+    LightSwitch3D(greenBox, BABYLON.Color3.Green(), light2);
+    LightSwitch3D(blueBox, BABYLON.Color3.Blue(), light3);
 
     // Conditions
     sphere.actionManager = new BABYLON.ActionManager(scene);
@@ -114,7 +123,7 @@ export function Acciones(camera, scene) {
 
     donut.actionManager.registerAction(new BABYLON.SetValueAction(
         { trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: sphere },
-        donut, "scaling", new BABYLON.Vector3(1.2, 1.2, 1.2)));
+        donut, "scaling", new BABYLON.Vector3(1.5, 1.5, 1.5)));
 
     donut.actionManager.registerAction(new BABYLON.SetValueAction(
         { trigger: BABYLON.ActionManager.OnIntersectionExitTrigger, parameter: sphere }

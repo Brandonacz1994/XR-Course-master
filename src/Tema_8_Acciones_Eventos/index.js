@@ -1,5 +1,3 @@
-
-import React from "react";
 import * as BABYLON from "babylonjs";
 import * as MATERIALS from "babylonjs-materials"
 import SceneComponent from "../Babylon_components/SceneComponent";
@@ -45,8 +43,8 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   ground_grid.position.y = 0.02
 
 
-  Acciones(camera, scene)
-
+  Acciones(camera, scene);
+  Events.GeneralEvents(scene);
   Events.DragEvents(camera, ground_grid, canvas, scene);
   Events.KeyBoardEvents(scene.getMeshById("sphere"), scene);
 

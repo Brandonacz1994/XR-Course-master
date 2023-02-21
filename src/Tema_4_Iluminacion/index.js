@@ -1,5 +1,3 @@
-
-import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
 import * as Lights_Module from "./Lights_Module"

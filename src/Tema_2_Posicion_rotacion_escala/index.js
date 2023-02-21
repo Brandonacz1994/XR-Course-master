@@ -1,5 +1,3 @@
-
-import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
 import { showWorldAxis, showLocalAxes } from "./Axes"
@@ -59,19 +57,19 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   /*Examples using boxes  */
 
   var faceColors = [];
-	faceColors[0] = BABYLON.Color3.Blue();
-	faceColors[1] = BABYLON.Color3.Red();
-	faceColors[2] = BABYLON.Color3.Green();
-	faceColors[3] = BABYLON.Color3.White();
-	faceColors[4] = BABYLON.Color3.Yellow();
-	faceColors[5] = BABYLON.Color3.Black();
+  faceColors[0] = BABYLON.Color3.Blue();
+  faceColors[1] = BABYLON.Color3.Red();
+  faceColors[2] = BABYLON.Color3.Green();
+  faceColors[3] = BABYLON.Color3.White();
+  faceColors[4] = BABYLON.Color3.Yellow();
+  faceColors[5] = BABYLON.Color3.Black();
 
-	var options = {
-	    width: 0.7,
-        height: 0.7,
-        depth: 0.7,
-        faceColors: faceColors
-    };
+  var options = {
+    width: 0.7,
+    height: 0.7,
+    depth: 0.7,
+    faceColors: faceColors
+  };
 
 
   var box1 = BABYLON.Mesh.CreateBox("Box1", 1.0, scene);
@@ -134,7 +132,7 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   }
 
 
-  var rot_x = Math.PI/128;
+  var rot_x = Math.PI / 128;
   var rot_y = 0;
   var rot_z = 0;
 
@@ -145,7 +143,7 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
 
   scene.onBeforeRenderObservable.add(() => {
 
-    if(rot_count == 128) {
+    if (rot_count == 128) {
       rot_count = 0;
       rot_temp = rot_z;
       rot_z = rot_y;
@@ -155,8 +153,8 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
     mainbox.addRotation(rot_x, rot_y, rot_z); // for adding rotation
     rot_count++;
 
-    a +=0.005;
-    var sign = Math.cos(a)/Math.abs(Math.cos(a)); //signoidal function for movement
+    a += 0.005;
+    var sign = Math.cos(a) / Math.abs(Math.cos(a)); //signoidal function for movement
     //mainbox.locallyTranslate(new BABYLON.Vector3(0.02 * sign, 0, 0.02 * sign));
 
   });

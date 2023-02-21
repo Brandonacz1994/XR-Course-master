@@ -1,10 +1,7 @@
-
-import React from "react";
 import * as BABYLON from "babylonjs";
 import * as MATERIALS from "babylonjs-materials"
 import SceneComponent from "../Babylon_components/SceneComponent";
 import { showWorldAxis, showLocalAxes } from "./Axes"
-import { Vector3 } from "babylonjs";
 
 
 const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
@@ -187,8 +184,8 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
 
   CoT_2Axis.parent = CoT_2;
   CoT_2.parent = CoT;
-  CoT_2.position.z = 2;
-  
+  CoT_2.position.z = 4;
+
   CoT_3Axis.parent = CoT_3;
   CoT_3.parent = CoT_2;
   CoT_3.position.z = 2;
@@ -257,6 +254,82 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
 
 
   })
+
+
+
+  //create two boxes that follow a path
+  var box_follower1 = BABYLON.MeshBuilder.CreateBox("box_follower1", options, scene, true);
+  box_follower1.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
+  var box_follower2 = box_follower1.clone("box_follower2")
+
+  // Create array of points to create a circle path (using CreateLines)
+
+  var circle_points = [];
+  var n = 500; // number of points
+  var r = 10; //radius
+  for (var total = 0; total < n; total++) {
+    circle_points.push(new BABYLON.Vector3(
+      0 + r * Math.cos(total * Math.PI * 2 / n),
+      0,
+      r * Math.sin(total * Math.PI * 2 / n)
+    ));
+  }
+
+  circle_points.push(circle_points[0]); // push to close path
+  var circle = BABYLON.MeshBuilder.CreateLines("circle", { points: circle_points }, scene);
+
+  box_follower1.parent = circle;
+
+  //create array of points to create a elliptical path (using CreateLines)
+
+  var a = 2.5; // Z width
+  var b = 5; // X width
+  var totalPoints = 400; //number of points
+  var ellipse_points = [];
+  var deltaTheta = Math.PI / totalPoints;
+
+  for (var theta = 0; theta < 2 * Math.PI; theta += deltaTheta) {
+    ellipse_points.push(new BABYLON.Vector3(b * Math.sin(theta), 0, a * Math.cos(theta)));
+  }
+
+  var ellipse = BABYLON.MeshBuilder.CreateLines("ellipse", { points: ellipse_points }, scene);
+  ellipse.color = BABYLON.Color3.Red();
+  ellipse.position = new BABYLON.Vector3(15, 0, 10)
+
+  box_follower2.parent = ellipse;
+
+
+  var box_follower1_movement = 0;
+  var box_follower2_movement = 0;
+
+  var box_follower_rotation = 0
+  var rotation_per_sec = Degrees_to_radians(180);
+
+  scene.onBeforeRenderObservable.add(() => {
+
+    var deltaTimeInsecs = (scene.getEngine().getDeltaTime()) / 1000;
+
+
+    box_follower1.position.x = circle_points[box_follower1_movement].x
+    box_follower1.position.z = circle_points[box_follower1_movement].z
+
+    box_follower1_movement = (box_follower1_movement + 1) % (circle_points.length - 1)
+
+
+    box_follower2.position.x = ellipse_points[box_follower2_movement].x
+    box_follower2.position.z = ellipse_points[box_follower2_movement].z
+
+    box_follower2_movement = (box_follower2_movement + 1) % (ellipse_points.length - 1)
+
+
+    box_follower1.rotation.y = box_follower_rotation;
+    box_follower2.rotation.y = box_follower_rotation;
+    box_follower_rotation += rotation_per_sec * deltaTimeInsecs;
+
+
+  })
+
+
 
 
 

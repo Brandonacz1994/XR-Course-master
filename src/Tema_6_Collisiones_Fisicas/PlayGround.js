@@ -27,10 +27,10 @@ export function PlayGround({playground_width=50,playground_depth=50,walls_width=
     var wallR = BABYLON.MeshBuilder.CreateBox("wallR", { width: walls_width, height: walls_height, depth: playground_depth },scene)
     wallR.position.set(playground_width/2+walls_width/2, walls_height/2 ,0)
 
-    wallF.visibility=0.2;
-    wallB.visibility=0.2;
-    wallL.visibility=0.2;
-    wallR.visibility=0.2;
+    wallF.visibility=0.1;
+    wallB.visibility=0.1;
+    wallL.visibility=0.1;
+    wallR.visibility=0.1;
 
     ground.checkCollisions=true;
     wallF.checkCollisions=true;

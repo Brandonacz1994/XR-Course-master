@@ -1,5 +1,3 @@
-
-import React from "react";
 import * as BABYLON from "babylonjs";
 import SceneComponent from "../Babylon_components/SceneComponent";
 import * as Materials_Module from "../Tema_5_Materiales_texturas/Materials_Module"
@@ -7,6 +5,9 @@ import * as Materials_Module from "../Tema_5_Materiales_texturas/Materials_Modul
 import fire from "../Tema_5_Materiales_texturas/fire.png"
 import water from "../Tema_5_Materiales_texturas/water.jpg"
 import grass from "../Tema_5_Materiales_texturas/grass.jpg"
+
+import earth from "../Tema_5_Materiales_texturas/solar_system_textures/2k_earth_daymap.jpg"
+import sun from "../Tema_5_Materiales_texturas/solar_system_textures/2k_sun.jpg"
 
 
 const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
@@ -44,8 +45,11 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   var box_material = Materials_Module.MaterialRandom(scene);
   box.material = box_material;
 
-  var sphere_material = Materials_Module.MaterialFromRGB_Hex("sphere_mat", { diffuseColor_hex: "#0000ff" }, scene)
+  //var sphere_material = Materials_Module.MaterialFromRGB_Hex("sphere_mat", { diffuseColor_hex: "#0000ff" }, scene)
+  var sphere_material = Materials_Module.MaterialFromTexture("sphere_mat", { diffuseTexture: earth }, scene)
   sphere.material = sphere_material;
+  sphere.rotation.z = Math.PI
+
 
   var ground_material = Materials_Module.MaterialFromTexture("ground_mat", { diffuseTexture: grass }, scene)
   ground_material.diffuseTexture.uScale = 10;

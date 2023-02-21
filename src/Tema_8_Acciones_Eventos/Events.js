@@ -1,6 +1,10 @@
 import * as BABYLON from "babylonjs";
 
-
+/**
+ * General events example: OnPointerObservable using PointerEventsTypes and OnKeyBoardObservable using KeyboardEventTypes.
+ * check console.log to see the called events.
+ * @param {BABYLON.Scene} scene The instanced babylonjs scene.
+ */ 
 export function GeneralEvents(scene) {
 
     scene.onPointerObservable.add((pointerInfo) => {
@@ -43,8 +47,14 @@ export function GeneralEvents(scene) {
 
 }
 
+/**
+ * Drag events example: using scene.pick() function and OnPointerObsevable.
+ * @param {BABYLON.Camera} camera The instanced babylonjs camera.
+ * @param {BABYLON.Mesh} ground The instanced mesh that represents the ground of a scene.
+ * @param {HTMLCanvasElement} canvas The canvas used to render the session.
+ * @param {BABYLON.Scene} scene The instanced babylon scene.
+ */
 export function DragEvents(camera,ground,canvas,scene) {
-
 
 
     var startingPoint;
@@ -111,6 +121,11 @@ export function DragEvents(camera,ground,canvas,scene) {
 
 }
 
+/**
+ * KeyBoard events example: using OnKeyboardObservable and KeyboardEventTypes.
+ * @param {BABYLON.Mesh} mesh The mesh to control using AWSD buttons.
+ * @param {BABYLON.Scene} scene The instanced babylonjs scene.
+ */
 export function KeyBoardEvents(mesh,scene) {
 
 	scene.onKeyboardObservable.add((kbInfo) => {
