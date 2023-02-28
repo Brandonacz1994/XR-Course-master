@@ -17,7 +17,7 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   // This attaches the camera to the canvas
   camera.attachControl(canvas, false);
 
-  //Lights_Module.DirectionalLight({diffuseColor:"#ffffff"},scene);
+  Lights_Module.DirectionalLight({diffuseColor:"#ffffff"},scene);
   //Lights_Module.PointLight(scene);
   Lights_Module.SpotLight(scene);
   //Lights_Module.HemisphericLight(scene);

@@ -5,6 +5,7 @@ import { showWorldAxis, showLocalAxes } from "../Babylon_components/Axes"
 import { Acciones } from "./Actions";
 import * as Events from "./Events"
 
+
 const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene, canvas: new HTMLCanvasElement }) => {
 
   const { canvas, scene, engine } = e;
@@ -27,6 +28,7 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   showWorldAxis(8, scene)
 
   var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 100 }, scene)
+
 
   var ground_grid = BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 100 }, scene)
 

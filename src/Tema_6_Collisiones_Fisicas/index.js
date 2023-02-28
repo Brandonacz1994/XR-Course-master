@@ -53,6 +53,14 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
   sphere.physicsImpostor.setAngularVelocity(new BABYLON.Quaternion(1, 0, 1, 0));
 
 
+  sphere.material = new BABYLON.StandardMaterial("s-mat", scene);
+
+  sphere.physicsImpostor.registerOnPhysicsCollide(test.ground.physicsImpostor, function(main, collided) {
+    main.object.material.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+});
+
+
+
   scene.onBeforeRenderObservable.add(() => {
     if (box !== undefined) {
       const deltaTimeInMillis = scene.getEngine().getDeltaTime();

@@ -26,6 +26,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "start_https": "set HTTPS=true&&set SSL_CRT_FILE=./SSL/cert.crt&&set SSL_KEY_FILE=./SSL/cert.key&&react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

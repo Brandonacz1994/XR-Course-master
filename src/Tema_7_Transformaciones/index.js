@@ -225,9 +225,11 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   const Cot2_angle_per_secs = Degrees_to_radians(30);
   const Cot3_angle_per_secs = Degrees_to_radians(0);
 
-  const rotating_box_angle_per_secs = Degrees_to_radians(300)
+  const rotating_box_angle_per_secs = Degrees_to_radians(360)
   const mini_box_angle_per_secs = Degrees_to_radians(180);
 
+  //rotating_box.parent = CoT_2;
+  rotating_box.visibility=0.3
 
 
   scene.onBeforeRenderObservable.add(() => {
@@ -294,10 +296,11 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
 
   var ellipse = BABYLON.MeshBuilder.CreateLines("ellipse", { points: ellipse_points }, scene);
   ellipse.color = BABYLON.Color3.Red();
-  ellipse.position = new BABYLON.Vector3(15, 0, 10)
+  
 
   box_follower2.parent = ellipse;
 
+  ellipse.position = new BABYLON.Vector3(15, 3, 10)
 
   var box_follower1_movement = 0;
   var box_follower2_movement = 0;
@@ -315,7 +318,7 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
 
     box_follower1_movement = (box_follower1_movement + 1) % (circle_points.length - 1)
 
-
+  
     box_follower2.position.x = ellipse_points[box_follower2_movement].x
     box_follower2.position.z = ellipse_points[box_follower2_movement].z
 
