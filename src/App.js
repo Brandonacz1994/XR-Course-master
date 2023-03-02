@@ -13,6 +13,7 @@ import Tema_7 from './Tema_7_Transformaciones';
 import Tema_8 from './Tema_8_Acciones_Eventos'
 import Tema_9 from './Tema_9_Interacciones_interfaces';
 import Tema_10 from './Tema_10_WebXR';
+import Tema_11 from './Tema_11_GUI_Json'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/tema_8' element={<Tema_8/>} ></Route>
           <Route path='/tema_9' element={<Tema_9/>} ></Route>
           <Route path='/tema_10' element={<Tema_10/>}></Route>
+          <Route path='/tema_11' element={<Tema_11/>}></Route>
       </Routes>
     </Router>
 )}
