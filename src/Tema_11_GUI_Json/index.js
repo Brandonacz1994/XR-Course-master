@@ -127,7 +127,12 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
     let element = advancedTexture.getControlByName("Button");
     element.isVisible = true;
 
+    scene.onPointerPick()
 
+    element.onPointerClickObservable((event)=>{
+        
+
+    })
 
 
 

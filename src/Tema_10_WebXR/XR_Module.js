@@ -9,11 +9,6 @@ import * as GUI from "babylonjs-gui";
    * @param {BABYLON.Scene} scene the instanced babylon js scene.
    * @returns the promised XR default experience instance.
    */
-
-
-
-
-
 export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
 
 
@@ -113,7 +108,7 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
                         break
                     case BABYLON.WebXRState.ENTERING_XR:
                         // xr is being initialized, enter XR request was made
-                        if (ground && !mesheswithShadows) {
+                        if (ground && mesheswithShadows.length > 1) {
                             ground.visibility = 0;
                         }
                         if (skybox) {
@@ -218,6 +213,8 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
         console.log("Se ha cargado funciones XR satisfactoriamente.");
         return xrExperience;
     })
+
+    
 
     
 
