@@ -16,7 +16,7 @@ export function GizmoInterface(scene) {
     gizmoManager.positionGizmoEnabled = false;
     gizmoManager.rotationGizmoEnabled = false;
     gizmoManager.boundingBoxGizmoEnabled = true;
-    gizmoManager.gizmos.boundingBoxGizmo.setEnabledScaling(false);
+    gizmoManager.gizmos.boundingBoxGizmo.setEnabledScaling(true);
 
     gizmoManager.gizmos.boundingBoxGizmo.fixedDragMeshScreenSize=true;
     gizmoManager.gizmos.boundingBoxGizmo.rotationSphereSize= 0.18;

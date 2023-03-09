@@ -13,7 +13,7 @@ import { GizmoInterface } from "../Tema_9_Interacciones_interfaces/GizmoInterfac
 
 import { interactiveRobotimport } from "./interactiveRobotimport";
 
-import robot from "../Assets/3Dmodels/Robot.glb"
+import ufo from "../Assets/3Dmodels/ufo.glb"
 import chair from "../Assets/3Dmodels/SheenChair.glb"
 
 
@@ -106,7 +106,7 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
 
     const assetManager = new BABYLON.AssetsManager(scene);
 
-    var tasky = assetManager.addMeshTask("task", "", robot);
+    var tasky = assetManager.addMeshTask("task", "", ufo);
 
     tasky.onSuccess = function (task) {
 
@@ -147,7 +147,7 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
 
     }
 
-    //interactiveRobotimport(scene);
+    interactiveRobotimport(scene);
 
 }
 

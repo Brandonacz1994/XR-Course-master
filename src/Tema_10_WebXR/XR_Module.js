@@ -68,6 +68,7 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
         //AnchorSystem(xrExperience,advancedTextureFullScreen,scene);
         LightEstimation(xrExperience,mesheswithShadows);
 
+
     
 
         xrExperience.baseExperience.onStateChangedObservable.add((XRstate) => {
@@ -392,6 +393,8 @@ function LightEstimation(xrExperience,mesheswithShadows) {
     })
     
 }
+
+
 
 
 
