@@ -17,6 +17,8 @@ import Tema_11 from './Tema_11_GUI_Json'
 import Tema_12 from "./Tema_12_Importing_files"
 import Tema_13 from './Tema_13_Video_Audio_Espacial';
 import Tema_14 from './Tema_14_Animaciones';
+import Tema_15 from './Tema_15_Highlights';
+import Tema_16 from './Tema_16_Assets_Scene_Management';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path='/tema_12' element={<Tema_12/>}></Route>
           <Route path='/tema_13' element={<Tema_13/>}></Route>
           <Route path='/tema_14' element={<Tema_14/>}></Route>
+          <Route path='/tema_15' element={<Tema_15/>}></Route>
+          <Route path='/tema_16' element={<Tema_16/>}></Route>
       </Routes>
     </Router>
 )}

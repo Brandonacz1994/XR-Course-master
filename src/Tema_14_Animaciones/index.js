@@ -439,7 +439,11 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
 
 
 
-
+    engine.runRenderLoop(() => {
+        if (scene) {
+          scene.render();
+        }
+      });
 
 
 

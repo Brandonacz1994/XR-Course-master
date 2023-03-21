@@ -333,7 +333,11 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   })
 
 
-
+  engine.runRenderLoop(() => {
+    if (scene) {
+      scene.render();
+    }
+  });
 
 
 

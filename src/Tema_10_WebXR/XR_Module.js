@@ -64,12 +64,15 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
         var advancedTextureFullScreen = GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
 
 
+
         //HitTest(xrExperience,scene);
         //AnchorSystem(xrExperience,advancedTextureFullScreen,scene);
         LightEstimation(xrExperience,mesheswithShadows);
 
+        xrExperience.input.xrCamera.setTransformationFromNonVRCamera(scene.activeCamera, true);
+        xrExperience.baseExperience.camera.setTransformationFromNonVRCamera(scene.activeCamera, true);
 
-    
+
 
         xrExperience.baseExperience.onStateChangedObservable.add((XRstate) => {
 
@@ -83,6 +86,7 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
                         break
                     case BABYLON.WebXRState.ENTERING_XR:
                         // xr is being initialized, enter XR request was made
+                    
                         break
                     case BABYLON.WebXRState.EXITING_XR:
                         // xr exit request was made. not yet done.

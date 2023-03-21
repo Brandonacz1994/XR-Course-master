@@ -126,7 +126,11 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
     meshGUI.position.addInPlaceFromFloats(0, 2, 0);
     
 
-
+    engine.runRenderLoop(() => {
+        if (scene) {
+          scene.render();
+        }
+      });
 
 
 }

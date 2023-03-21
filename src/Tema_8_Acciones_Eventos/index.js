@@ -51,6 +51,13 @@ const onSceneReady = (e = { engine: new BABYLON.Engine, scene: new BABYLON.Scene
   Events.KeyBoardEvents(scene.getMeshById("sphere"), scene);
 
 
+  engine.runRenderLoop(() => {
+    if (scene) {
+      scene.render();
+    }
+  });
+
+
 
 
 };

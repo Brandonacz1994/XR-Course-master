@@ -26,10 +26,10 @@ export default ({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions, on
       scene.onReadyObservable.addOnce((scene) => onSceneReady({canvas,scene,engine}));
     }
 
-    engine.runRenderLoop(() => {
+    /*engine.runRenderLoop(() => {
      
       scene.render();
-    });
+    });*/
 
     const resize = () => {
       scene.getEngine().resize();

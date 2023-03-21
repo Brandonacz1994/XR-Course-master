@@ -43,6 +43,14 @@ const onSceneReady = (e = { engine: BABYLON.Engine, scene: BABYLON.Scene, canvas
 
   });
 
+
+  engine.runRenderLoop(() => {
+    if (scene) {
+      scene.render();
+    }
+  });
+  
+
 };
 
 

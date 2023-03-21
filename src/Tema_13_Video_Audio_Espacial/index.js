@@ -281,9 +281,17 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
 
 
 
+
     var mesheswithShadows = [box,sphere];
 
     XR_Module.XR_Experience(playground.ground,skybox,mesheswithShadows,scene);
+
+
+    engine.runRenderLoop(() => {
+        if (scene) {
+          scene.render();
+        }
+      });
 
 
 }

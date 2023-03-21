@@ -19,10 +19,11 @@ export function GizmoInterface(scene) {
     gizmoManager.gizmos.boundingBoxGizmo.setEnabledScaling(true);
 
     gizmoManager.gizmos.boundingBoxGizmo.fixedDragMeshScreenSize=true;
-    gizmoManager.gizmos.boundingBoxGizmo.rotationSphereSize= 0.18;
+    gizmoManager.gizmos.boundingBoxGizmo.rotationSphereSize= 0.09;
+    gizmoManager.gizmos.boundingBoxGizmo.scaleBoxSize= 0.09;
     gizmoManager.gizmos.boundingBoxGizmo.fixedDragMeshBoundsSize=false;
     gizmoManager.gizmos.boundingBoxGizmo.ignoreChildren=true;
-    
+
 
     gizmoManager.usePointerToAttachGizmos = false;
     gizmoManager.clearGizmoOnEmptyPointerEvent = true;
@@ -111,5 +112,7 @@ export function GizmoInterface(scene) {
         }
 
     })
+
+    return gizmoManager;
 
 }
