@@ -131,13 +131,14 @@ export function VideoPlayerTexture(videoUrl, audioUrl, videoTextureSettings, Aud
 
         }
     }));
+    
     videoPlane.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnDoublePickTrigger, () => {
 
         videoTexture.video.currentTime = 0;
         videoTexture.video.pause();
         videoSound.stop();
 
-    }))
+    }));
 
     return { videoTexture, videoSound, videoPlane, videoMaterial };
 
