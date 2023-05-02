@@ -81,11 +81,11 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
     playground.ground.physicsImpostor = new BABYLON.PhysicsImpostor(playground.ground, BABYLON.PhysicsImpostor.BoxImpostor, { restitution: 0.9, mass: 0 }, scene);
     playground.ground.receiveShadows = true;
     
-    const shadowMaterial = new MATERIALS.ShadowOnlyMaterial('shadowOnly', scene);
-    playground.ground.material = shadowMaterial;
+    //const shadowMaterial = new MATERIALS.ShadowOnlyMaterial('shadowOnly', scene);
+    //playground.ground.material = shadowMaterial;
 
-    //var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-    //light.intensity = 0.7;
+    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+    light.intensity = 0.7;
 
 
     var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 0.2, segments: 32 }, scene);

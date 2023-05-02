@@ -67,7 +67,9 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
 
         //HitTest(xrExperience,scene);
         //AnchorSystem(xrExperience,advancedTextureFullScreen,scene);
-        LightEstimation(xrExperience,mesheswithShadows);
+        //LightEstimation(xrExperience,mesheswithShadows);
+
+        basicAnchorSystem(xrExperience, advancedTextureFullScreen, scene);
 
         xrExperience.input.xrCamera.setTransformationFromNonVRCamera(scene.activeCamera, true);
         xrExperience.baseExperience.camera.setTransformationFromNonVRCamera(scene.activeCamera, true);
@@ -86,7 +88,7 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
                         break
                     case BABYLON.WebXRState.ENTERING_XR:
                         // xr is being initialized, enter XR request was made
-                    
+
                         break
                     case BABYLON.WebXRState.EXITING_XR:
                         // xr exit request was made. not yet done.
@@ -140,7 +142,7 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
 
         });
 
-       
+
 
         var button1 = GUI.Button.CreateSimpleButton("but1", "A modo XR");
         button1.width = "150px"
@@ -219,9 +221,9 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
         return xrExperience;
     })
 
-    
 
-    
+
+
 
 }
 
@@ -230,13 +232,13 @@ export async function XR_Experience(ground, skybox, mesheswithShadows, scene) {
  * @param {BABYLON.WebXRDefaultExperience} xrExperience 
  * @param {BABYLON.Scene} scene 
  */
-function HitTest(xrExperience,scene) {
+function HitTest(xrExperience, scene) {
 
     const xr_FeaturesManager = xrExperience.baseExperience.featuresManager;
 
     const xr_HitTest = xr_FeaturesManager.enableFeature(BABYLON.WebXRHitTest, "latest");
 
-    const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 },scene);
+    const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 }, scene);
     marker.isVisible = false;
     marker.rotationQuaternion = new BABYLON.Quaternion();
 
@@ -252,7 +254,7 @@ function HitTest(xrExperience,scene) {
         }
     });
 
-    
+
 }
 
 /**
@@ -261,15 +263,19 @@ function HitTest(xrExperience,scene) {
  * @param {GUI.AdvancedDynamicTexture} advancedTextureFullScreen 
  * @param {BABYLON.Scene} scene 
  */
-function AnchorSystem(xrExperience,advancedTextureFullScreen,scene) {
+function AnchorSystem(xrExperience, advancedTextureFullScreen, scene) {
 
     const { featuresManager } = xrExperience.baseExperience;
 
     featuresManager.enableFeature(BABYLON.WebXRBackgroundRemover);
 
+    // step 1 - enable hit test and anchor system from the features manager. 
+
     const hitTest = featuresManager.enableFeature(BABYLON.WebXRHitTest, 'latest');
 
     const anchorSystem = featuresManager.enableFeature(BABYLON.WebXRAnchorSystem, 'latest');
+
+    // Step 2 - create a dot (sphere) that will be used to show the hit test result
 
     const dot = BABYLON.SphereBuilder.CreateSphere('dot', {
         diameter: 0.05
@@ -284,9 +290,11 @@ function AnchorSystem(xrExperience,advancedTextureFullScreen,scene) {
     let lastHitTest = null;
 
     const pairs = []; //measurement pair array
-    let currentPair= null; //current measurement pair
+    let currentPair = null; //current measurement pair
 
     let anchorsAvailable = false;
+
+    // Step3 - listen to the hit test results and place the dot accordingly.
 
     hitTest.onHitTestResultObservable.add((results) => {
         if (results.length) {
@@ -375,11 +383,105 @@ function AnchorSystem(xrExperience,advancedTextureFullScreen,scene) {
 /**
  * 
  * @param {BABYLON.WebXRDefaultExperience} xrExperience 
+ * @param {GUI.AdvancedDynamicTexture} advancedTextureFullScreen 
+ * @param {BABYLON.Scene} scene 
+ */
+function basicAnchorSystem(xrExperience, advancedTextureFullScreen, scene) {
+
+    const { featuresManager } = xrExperience.baseExperience;
+
+    featuresManager.enableFeature(BABYLON.WebXRBackgroundRemover);
+
+    // step 1 - enable hit test and anchor system from the features manager. 
+
+    const hitTest = featuresManager.enableFeature(BABYLON.WebXRHitTest, 'latest');
+
+    const anchorSystem = featuresManager.enableFeature(BABYLON.WebXRAnchorSystem, 'latest');
+
+    // Step 2 - create a dot (sphere) that will be used to show the hit test result
+
+    const dot = BABYLON.SphereBuilder.CreateSphere('dot', {
+        diameter: 0.05
+    }, scene);
+    dot.rotationQuaternion = new BABYLON.Quaternion();
+
+    dot.material = new BABYLON.StandardMaterial('dot', scene);
+    dot.material.emissiveColor = BABYLON.Color3.Red();
+
+    dot.isVisible = false;
+
+    let lastHitTest = null;
+
+    const pairs = []; //measurement pair array
+    let currentPair = null; //current measurement pair
+
+    // Step 3 - listen to the hit test results and place the dot accordingly.
+
+    hitTest.onHitTestResultObservable.add((results) => {
+        //if we have a hit test result
+        if (results.length) {
+            //set the dot position to the hit test result
+            dot.isVisible = true;
+            results[0].transformationMatrix.decompose(dot.scaling, dot.rotationQuaternion, dot.position);
+            lastHitTest = results[0];
+
+        } else {
+            lastHitTest = null;
+            dot.isVisible = false;
+        }
+    });
+
+    // process to create pairs of dots
+    const processClick = () => {
+        const newDot = dot.clone('newDot');
+        
+            const label = new GUI.Rectangle("label");
+            label.background = "black"
+            label.height = "60px";
+            label.alpha = 0.5;
+            label.width = "200px";
+            label.cornerRadius = 20;
+            label.thickness = 1;
+            label.zIndex = 5;
+            advancedTextureFullScreen.addControl(label);
+
+            const text = new GUI.TextBlock("testlabel", "ancla");
+            text.color = "white";
+            text.fontSize = "36px"
+            label.addControl(text);
+
+            label.linkWithMesh(newDot);
+
+            return newDot;
+        } 
+       
+
+    // Step 4 - listen to the pointer down event to create an anchor
+    scene.onPointerObservable.add(async (eventData) => {
+        if (lastHitTest) {
+            if (lastHitTest.xrHitResult.createAnchor) {
+                const anchor = await anchorSystem.addAnchorPointUsingHitTestResultAsync(lastHitTest);
+            } else {
+                processClick();
+            }
+        }
+    }, BABYLON.PointerEventTypes.POINTERDOWN);
+
+    anchorSystem.onAnchorAddedObservable.add((anchor) => {
+        anchor.attachedNode = processClick();
+    });
+
+
+}
+
+/**
+ * 
+ * @param {BABYLON.WebXRDefaultExperience} xrExperience 
  * @param {[BABYLON.Scene]} mesheswithShadows 
  */
-function LightEstimation(xrExperience,mesheswithShadows) {
+function LightEstimation(xrExperience, mesheswithShadows) {
 
-    
+
     const lightEstimation = xrExperience.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.LIGHT_ESTIMATION, 'latest', {
         setSceneEnvironmentTexture: true,
         // cubeMapPollInterval: 1000,
@@ -392,10 +494,10 @@ function LightEstimation(xrExperience,mesheswithShadows) {
     shadowGenerator.blurScale = 2;
     shadowGenerator.setDarkness(0.1);
 
-    mesheswithShadows.forEach((mesh)=>{
+    mesheswithShadows.forEach((mesh) => {
         shadowGenerator.getShadowMap().renderList.push(mesh);
     })
-    
+
 }
 
 

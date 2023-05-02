@@ -17,7 +17,7 @@ export function SkyMaterialDemo(size,scene) {
   var skybox = BABYLON.Mesh.CreateBox("skyBox", size, scene);
   skybox.material = skyboxMaterial;
 
-  skybox.material.inclination = -0.35;
+  skybox.material.inclination = .34;
     
 }
 

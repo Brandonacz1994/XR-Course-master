@@ -31,9 +31,9 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
   //light.intensity = 0.7;
 
 
-  Skyboxes.SkyMaterialDemo(1000, scene);
+  //Skyboxes.SkyMaterialDemo(1000, scene);
   //Skyboxes.SkyCubeTextureDemo(images,1000,scene);
-  //Skyboxes.SkyHDRTextureDemo(hdr,200,scene);
+  Skyboxes.SkyHDRTextureDemo(hdr,200,scene);
 
   var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene)
   sphere.position = new BABYLON.Vector3(3, 1, 0);

@@ -67,10 +67,10 @@ const onSceneReady = async (e = { engine: new BABYLON.Engine, scene: new BABYLON
     };
 
 
-    var videoGUIDemo = VideoUI("VideoUIDemo", 1920,1080, videoRickroll, videoSettings, scene);
+    //var videoGUIDemo = VideoUI("VideoUIDemo", 1920,1080, videoRickroll, videoSettings, scene);
 
-    //var windowGUIDemo = WindowUI("WindowUIDemo", 1920, 1080, scene);
-
+    var windowGUIDemo = WindowUI("WindowUIDemo", 1920, 1080, scene);
+       
 
 
 
