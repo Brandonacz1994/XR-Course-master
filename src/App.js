@@ -21,7 +21,6 @@ import Tema_15 from './Tema_15_Highlights';
 import Tema_16 from './Tema_16_Assets_Scene_Management';
 import Tema_17 from './Tema_17_Skyboxes';
 
-
 function App() {
   return (
     <Router>
@@ -44,6 +43,7 @@ function App() {
           <Route path='/tema_15' element={<Tema_15/>}></Route>
           <Route path='/tema_16' element={<Tema_16/>}></Route>
           <Route path='/tema_17' element={<Tema_17/>}></Route>
+    
       </Routes>
     </Router>
 )}
